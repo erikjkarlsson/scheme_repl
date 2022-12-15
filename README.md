@@ -1,5 +1,75 @@
-# scheme_repl
-Scheme Evaluator, Parser and Tokenizer written in Python
+# Scheme Evaluator, Parser and Tokenizer written in Python
+
+The main evaluator, tokenizer and parser is contained in `scheme.py`. 
+
+## To Do List
+
+- Load files
+- Stack Based Evaluation instead of Recursive
+- More predefined functions 
+ - Standard Library
+- Define works for expressions
+- Lambda Functions 
+  - Function definitions
+  - Tail Recursion Optimization  
+...
+
+## Features
+
+- Symbol Table for user-defined variables.
+- Function Table where predefined functions can be added
+- Constant Table for constants 
+
+- Evaluate arithmetic expressions using `+`, `-`, `/` and `*`.
+
+```python
+>>> eval_expr("(* 1 2 3 4 5 6 7 8 9)")
+Tok(362880, FLO)
+
+>>> eval_expr("(* (/ 1 2) (/ 1 2))")
+Tok(0.25, FLO)
+
+>>>eval_expr("(+ 1 (+ 1 (+ 1 (+ 1 (+ 1 (+ 1 (+ 1 100)))))))")
+Tok(107.0, FLO)
+
+>>> eval_expr("(* (- 0 1) (- 0 1))")
+Tok(1.0, FLO)
+```
+
+- Simple global definitions using `define`, expressions can currently not be defined, only constants.
+
+```python
+>>> eval_expr("(define x 20)")
+Tok(20, INT)
+
+>>> eval_expr("(* x x)")
+Tok(400, FLO)
+```
+
+- Scoped multi-variable definitions using `let`, even works when nested.
+
+```python
+>>> eval_expr("(let ((x (+ 1 2)) (y (* 2 3))) (* x y))")
+Tok(18.0, FLO)
+
+>>> eval_expr("(let ((x (+ 1 2))) (let ((y (* 2 3))) (* x y)))")
+Tok(18.0, FLO)
+```
+
+## Run
+To run the tests followed by starting the REPL, you can do the
+following:
+
+```python
+$ cd scheme_repl
+$ chmod +x ./scheme.py 
+$ ./scheme.py
+```
+
+## Dependencies 
+### Python 3
+ - `re`
+ - `functools`
 
 Functions 
 ============

@@ -16,11 +16,19 @@ The main evaluator, tokenizer and parser is contained in `scheme.py`.
 
 ## Features
 
-- Symbol Table for user-defined variables.
-- Function Table where predefined functions can be added
-- Constant Table for constants 
+### Extension of Features, Functions and Symbols is Easy 
 
-- Evaluate arithmetic expressions using `+`, `-`, `/` and `*`.
+- **Function Table** where predefined functions can be added, its only
+  needed to add them in `function_table` for them to be recognized by
+  the evaluator. The same goes for symbols and constants.
+
+- **Symbol Table** for user-defined variables, `symbol_table`.
+
+- **Constant Table** for constants, `constant_table`.
+
+### Evaluation of Nested Arithmetic Expressions
+
+- Evaluate **arithmetic expressions** using `+`, `-`, `/` and `*`.
 
 ```python
 >>> eval_expr("(* 1 2 3 4 5 6 7 8 9)")
@@ -36,7 +44,9 @@ Tok(107.0, FLO)
 Tok(1.0, FLO)
 ```
 
-- Simple global definitions using `define`, expressions can currently not be defined, only constants.
+### Global Definitions 
+
+- Simple **global definitions** using `define`, expressions can currently not be defined, only constants.
 
 ```python
 >>> eval_expr("(define x 20)")
@@ -45,6 +55,8 @@ Tok(20, INT)
 >>> eval_expr("(* x x)")
 Tok(400, FLO)
 ```
+
+### Scoped Multi-variable Declarations (i.e `let`)
 
 - Scoped multi-variable definitions using `let`, even works when nested.
 
@@ -57,8 +69,9 @@ Tok(18.0, FLO)
 ```
 
 ## Run
-To run the tests followed by starting the REPL, you can do the
-following:
+
+On GNU+Linux, to run the tests followed by starting the REPL, you can
+do the following:
 
 ```python
 $ cd scheme_repl
@@ -66,13 +79,15 @@ $ chmod +x ./scheme.py
 $ ./scheme.py
 ```
 
-## Dependencies 
-### Python 3
+Dependencies
+============
+
+## Python 3
  - `re`
  - `functools`
 
-Functions 
-============
+Functions
+=========
 - `determine(string):` Will determine the type a STRING should have
   (such as `INT` or `SYM`), and will return a token created from the
   STRING.
